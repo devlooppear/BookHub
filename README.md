@@ -8,6 +8,7 @@ name (full name of the user)
 email (unique email address for login)
 password (hashed and salted password for security)
 role_id (foreign key to Roles, determining user type - 'User' or 'Librarian')
+
 Roles:
 
 Attributes:
