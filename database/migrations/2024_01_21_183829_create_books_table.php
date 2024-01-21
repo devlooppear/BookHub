@@ -12,7 +12,6 @@ class CreateBooksTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('author');
-            $table->string('isbn')->unique();
             $table->string('category');
             $table->boolean('availability')->default(true);
             $table->timestamps();

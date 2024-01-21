@@ -12,7 +12,6 @@ class Book extends Model
     protected $fillable = [
         'title',
         'author',
-        'isbn',
         'category',
         'availability'
     ];

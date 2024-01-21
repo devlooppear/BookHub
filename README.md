@@ -1,40 +1,48 @@
-# BookHub: Library Reservation System
+ # BookHub: Sistema de Reservas de Biblioteca
 
-Users and Librarians (Users):
+O BookHub é um sistema de reserva de biblioteca que gerencia usuários, bibliotecários, livros e reservas. Abaixo estão as entidades principais e seus atributos.
 
-Attributes:
-id (primary key, auto-incremented)
-name (full name of the user)
-email (unique email address for login)
-password (hashed and salted password for security)
-role_id (foreign key to Roles, determining user type - 'User' or 'Librarian')
+# Usuários e Bibliotecários (Users):
 
-Roles:
+ ### Atributos:
 
-Attributes:
-id (primary key, auto-incremented)
-name (role name, e.g., 'User' or 'Librarian')
+    - id: Chave primária, autoincrementada.
+    - name: Nome completo do usuário.
+    - email: Endereço de e-mail único para login.
+    - password: Senha criptografada.
+    - role_id: Chave estrangeira para Roles, determinando o tipo de usuário - 'Usuário' ou 'Bibliotecário'.
 
-Permissions:
+# Funções (Roles):
 
-Attributes:
-id (primary key, auto-incremented)
-name (name of the permission, e.g., 'CanReserve', 'CanCancelReservation')
-Books:
+ ### Atributos:
 
-Attributes:
-id (primary key, auto-incremented)
-title (title of the book)
-author (name of the author)
-isbn (International Standard Book Number)
-category (genre or category of the book)
-availability (boolean indicating whether the book is currently available)
-Reservations:
+    - id: Chave primária, autoincrementada.
+    - name: Nome da função, por exemplo, 'Usuário' ou 'Bibliotecário'.
 
-Attributes:
-id (primary key, auto-incremented)
-user_id (foreign key to Users)
-book_id (foreign key to Books)
-reservation_date (date when the reservation was made)
-pickup_deadline (date until which the book should be picked up)
-is_active (boolean indicating whether the reservation is active or not)
+# Permissões (Permissions):
+
+ ### Atributos:
+
+    - id: Chave primária, autoincrementada.
+    - name: Nome da permissão, por exemplo, 'Pode Reservar', 'Pode Cancelar Reserva'.
+
+# Livros (Books):
+
+ ### Atributos:
+
+    - id: Chave primária, autoincrementada.
+    - title: Título do livro.
+    - author: Nome do autor.
+    - category: Gênero ou categoria do livro.
+    - availability: Booleano indicando se o livro está disponível no momento.
+
+# Reservas (Reservations):
+
+ ### Atributos:
+
+    - id: Chave primária, autoincrementada.
+    - user_id: Chave estrangeira para Users.
+    - book_id: Chave estrangeira para Books.
+    - reservation_date: Data em que a reserva foi feita.
+    - pickup_deadline: Data até a qual o livro deve ser retirado.
+    - is_active: Booleano indicando se a reserva está ativa ou não.
