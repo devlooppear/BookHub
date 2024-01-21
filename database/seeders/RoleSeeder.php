@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Role;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class RoleSeeder extends Seeder
@@ -13,6 +12,15 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        Role::factory(10)->create();
+        // Find the highest existing ID
+        $maxId = Role::max('id') ?? 0;
+
+        // Specify the specific IDs for 'User' and 'Librarian'
+        $roleIds = ['User' => $maxId + 1, 'Librarian' => $maxId + 2];
+
+        // Create roles using the specified IDs
+        foreach ($roleIds as $name => $id) {
+            Role::create(['id' => $id, 'name' => $name]);
+        }
     }
 }

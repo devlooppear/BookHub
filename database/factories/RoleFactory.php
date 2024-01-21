@@ -11,8 +11,15 @@ class RoleFactory extends Factory
 
     public function definition()
     {
+        // Specify the specific IDs for 'User' and 'Librarian'
+        $roleIds = ['User' => 1, 'Librarian' => 2];
+
+        // Randomly select 'User' or 'Librarian'
+        $roleName = $this->faker->randomElement(['User', 'Librarian']);
+
         return [
-            'name' => $this->faker->unique()->randomElement(['User', 'Librarian']),
+            'id' => $roleIds[$roleName],
+            'name' => $roleName,
         ];
     }
 }
