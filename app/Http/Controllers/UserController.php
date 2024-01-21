@@ -13,7 +13,7 @@ class UserController extends Controller
     public function index()
     {
         try {
-            $users = User::all();
+            $users = User::with(['role', 'books'])->get();
             return response()->json($users);
         } catch (Exception $e) {
             Log::error('Error fetching users: ' . $e->getMessage());

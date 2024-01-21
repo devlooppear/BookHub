@@ -18,7 +18,7 @@ class ReservationController extends Controller
     public function index()
     {
         try {
-            $reservations = Reservation::all();
+            $reservations = Reservation::with(['user','book'])->get();
             return response()->json($reservations);
         } catch (Exception $e) {
             Log::error('Error fetching reservations: ' . $e->getMessage());

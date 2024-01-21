@@ -15,5 +15,9 @@ class Book extends Model
         'category',
         'availability'
     ];
-    
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'reservations');
+    }
 }
