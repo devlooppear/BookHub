@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Permission;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class PermissionController extends Controller
 {
@@ -14,9 +16,13 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        $permissions = Permission::all();
-
-        return response()->json($permissions);
+        try {
+            $permissions = Permission::all();
+            return response()->json($permissions);
+        } catch (Exception $e) {
+            Log::error('Error fetching permissions: ' . $e->getMessage());
+            return response()->json(['error' => 'An error occurred while fetching permissions.'], 500);
+        }
     }
 
     /**
@@ -27,13 +33,18 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|unique:permissions',
-        ]);
+        try {
+            $request->validate([
+                'name' => 'required|string|unique:permissions',
+            ]);
 
-        $permission = Permission::create($request->all());
+            $permission = Permission::create($request->all());
 
-        return response()->json($permission, 201);
+            return response()->json($permission, 201);
+        } catch (Exception $e) {
+            Log::error('Error storing permission: ' . $e->getMessage());
+            return response()->json(['error' => 'An error occurred while storing the permission.'], 500);
+        }
     }
 
     /**
@@ -44,7 +55,12 @@ class PermissionController extends Controller
      */
     public function show(Permission $permission)
     {
-        return response()->json($permission);
+        try {
+            return response()->json($permission);
+        } catch (Exception $e) {
+            Log::error('Error fetching permission details: ' . $e->getMessage());
+            return response()->json(['error' => 'An error occurred while fetching permission details.'], 500);
+        }
     }
 
     /**
@@ -56,13 +72,18 @@ class PermissionController extends Controller
      */
     public function update(Request $request, Permission $permission)
     {
-        $request->validate([
-            'name' => 'string|unique:permissions',
-        ]);
+        try {
+            $request->validate([
+                'name' => 'string|unique:permissions',
+            ]);
 
-        $permission->update($request->all());
+            $permission->update($request->all());
 
-        return response()->json($permission, 200);
+            return response()->json($permission, 200);
+        } catch (Exception $e) {
+            Log::error('Error updating permission: ' . $e->getMessage());
+            return response()->json(['error' => 'An error occurred while updating the permission.'], 500);
+        }
     }
 
     /**
@@ -73,8 +94,12 @@ class PermissionController extends Controller
      */
     public function destroy(Permission $permission)
     {
-        $permission->delete();
-
-        return response()->json(null, 204);
+        try {
+            $permission->delete();
+            return response()->json(null, 204);
+        } catch (Exception $e) {
+            Log::error('Error deleting permission: ' . $e->getMessage());
+            return response()->json(['error' => 'An error occurred while deleting the permission.'], 500);
+        }
     }
 }

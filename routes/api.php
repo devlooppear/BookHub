@@ -8,30 +8,32 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 
+/*
+|--------------------------------------------------------------------------
+| API Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register API routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "api" middleware group. Make something great!
+|
+*/
+
 Route::middleware('auth:sanctum')->group(function () {
 
-    // Books
-    Route::prefix('books')->group(function () {
-        Route::apiResource('books', BookController::class);
-    });
-
-    // Permissions
-    Route::prefix('permissions')->group(function () {
-        Route::apiResource('permissions', PermissionController::class);
-    });
-
-    // Reservations
-    Route::prefix('reservations')->group(function () {
-        Route::apiResource('reservations', ReservationController::class);
-    });
-
-    // Roles
-    Route::prefix('roles')->group(function () {
-        Route::apiResource('roles', RoleController::class);
-    });
-
-    // Users
-    Route::prefix('users')->group(function () {
-        Route::apiResource('users', UserController::class);
-    });
 });
+
+// Books
+Route::apiResource('books', BookController::class);
+
+// Permissions
+Route::apiResource('permissions', PermissionController::class);
+
+// Reservations
+Route::apiResource('reservations', ReservationController::class);
+
+// Roles
+Route::apiResource('roles', RoleController::class);
+
+// Users
+Route::apiResource('users', UserController::class);
