@@ -14,6 +14,7 @@ Roles:
 Attributes:
 id (primary key, auto-incremented)
 name (role name, e.g., 'User' or 'Librarian')
+
 Permissions:
 
 Attributes:
