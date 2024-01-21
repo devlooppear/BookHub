@@ -36,6 +36,7 @@ class RoleController extends Controller
     {
         try {
             $request->validate([
+                'id' => 'required|number',
                 'name' => 'required|string|unique:roles',
             ]);
 
