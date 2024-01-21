@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
 
 class RoleController extends Controller
@@ -21,7 +22,7 @@ class RoleController extends Controller
             return response()->json($roles);
         } catch (Exception $e) {
             Log::error('Error fetching roles: ' . $e->getMessage());
-            return response()->json(['error' => 'An error occurred while fetching roles.'], 500);
+            return response()->json(['error' => 'An error occurred while fetching roles: ' . $e->getMessage()]);
         }
     }
 
@@ -43,7 +44,7 @@ class RoleController extends Controller
             return response()->json($role, 201);
         } catch (Exception $e) {
             Log::error('Error storing role: ' . $e->getMessage());
-            return response()->json(['error' => 'An error occurred while storing the role.'], 500);
+            return response()->json(['error' => 'An error occurred while storing the role: ' . $e->getMessage()]);
         }
     }
 
@@ -59,7 +60,7 @@ class RoleController extends Controller
             return response()->json($role);
         } catch (Exception $e) {
             Log::error('Error fetching role details: ' . $e->getMessage());
-            return response()->json(['error' => 'An error occurred while fetching role details.'], 500);
+            return response()->json(['error' => 'An error occurred while fetching role details: ' . $e->getMessage()]);
         }
     }
 
@@ -82,7 +83,7 @@ class RoleController extends Controller
             return response()->json($role, 200);
         } catch (Exception $e) {
             Log::error('Error updating role: ' . $e->getMessage());
-            return response()->json(['error' => 'An error occurred while updating the role.'], 500);
+            return response()->json(['error' => 'An error occurred while updating the role: ' . $e->getMessage()]);
         }
     }
 
@@ -99,7 +100,7 @@ class RoleController extends Controller
             return response()->json(null, 204);
         } catch (Exception $e) {
             Log::error('Error deleting role: ' . $e->getMessage());
-            return response()->json(['error' => 'An error occurred while deleting the role.'], 500);
+            return response()->json(['error' => 'An error occurred while deleting the role: ' . $e->getMessage()]);
         }
     }
 }

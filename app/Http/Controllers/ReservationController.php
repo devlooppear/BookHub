@@ -22,7 +22,7 @@ class ReservationController extends Controller
             return response()->json($reservations);
         } catch (Exception $e) {
             Log::error('Error fetching reservations: ' . $e->getMessage());
-            return response()->json(['error' => 'An error occurred while fetching reservations.'], 500);
+            return response()->json(['error' => 'An error occurred while fetching reservations: ' . $e->getMessage()]);
         }
     }
 
@@ -48,7 +48,7 @@ class ReservationController extends Controller
             return response()->json($reservation, 201);
         } catch (Exception $e) {
             Log::error('Error storing reservation: ' . $e->getMessage());
-            return response()->json(['error' => 'An error occurred while storing the reservation.'], 500);
+            return response()->json(['error' => 'An error occurred while storing the reservation: ' . $e->getMessage()]);
         }
     }
 
@@ -64,7 +64,7 @@ class ReservationController extends Controller
             return response()->json($reservation);
         } catch (Exception $e) {
             Log::error('Error fetching reservation details: ' . $e->getMessage());
-            return response()->json(['error' => 'An error occurred while fetching reservation details.'], 500);
+            return response()->json(['error' => 'An error occurred while fetching reservation details: ' . $e->getMessage()]);
         }
     }
 
@@ -91,7 +91,7 @@ class ReservationController extends Controller
             return response()->json($reservation, 200);
         } catch (Exception $e) {
             Log::error('Error updating reservation: ' . $e->getMessage());
-            return response()->json(['error' => 'An error occurred while updating the reservation.'], 500);
+            return response()->json(['error' => 'An error occurred while updating the reservation: ' . $e->getMessage()]);
         }
     }
 
@@ -108,7 +108,7 @@ class ReservationController extends Controller
             return response()->json(null, 204);
         } catch (Exception $e) {
             Log::error('Error deleting reservation: ' . $e->getMessage());
-            return response()->json(['error' => 'An error occurred while deleting the reservation.'], 500);
+            return response()->json(['error' => 'An error occurred while deleting the reservation: ' . $e->getMessage()]);
         }
     }
 }

@@ -21,7 +21,7 @@ class PermissionController extends Controller
             return response()->json($permissions);
         } catch (Exception $e) {
             Log::error('Error fetching permissions: ' . $e->getMessage());
-            return response()->json(['error' => 'An error occurred while fetching permissions.'], 500);
+            return response()->json(['error' => 'An error occurred while fetching permissions: ' . $e->getMessage()]);
         }
     }
 
@@ -43,7 +43,7 @@ class PermissionController extends Controller
             return response()->json($permission, 201);
         } catch (Exception $e) {
             Log::error('Error storing permission: ' . $e->getMessage());
-            return response()->json(['error' => 'An error occurred while storing the permission.'], 500);
+            return response()->json(['error' => 'An error occurred while storing the permission: ' . $e->getMessage()]);
         }
     }
 
@@ -59,7 +59,7 @@ class PermissionController extends Controller
             return response()->json($permission);
         } catch (Exception $e) {
             Log::error('Error fetching permission details: ' . $e->getMessage());
-            return response()->json(['error' => 'An error occurred while fetching permission details.'], 500);
+            return response()->json(['error' => 'An error occurred while fetching permission details: ' . $e->getMessage()]);
         }
     }
 
@@ -82,7 +82,7 @@ class PermissionController extends Controller
             return response()->json($permission, 200);
         } catch (Exception $e) {
             Log::error('Error updating permission: ' . $e->getMessage());
-            return response()->json(['error' => 'An error occurred while updating the permission.'], 500);
+            return response()->json(['error' => 'An error occurred while updating the permission: ' . $e->getMessage()]);
         }
     }
 
@@ -99,7 +99,7 @@ class PermissionController extends Controller
             return response()->json(null, 204);
         } catch (Exception $e) {
             Log::error('Error deleting permission: ' . $e->getMessage());
-            return response()->json(['error' => 'An error occurred while deleting the permission.'], 500);
+            return response()->json(['error' => 'An error occurred while deleting the permission: ' . $e->getMessage()]);
         }
     }
 }

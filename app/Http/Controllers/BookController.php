@@ -22,7 +22,7 @@ class BookController extends Controller
             return response()->json($books);
         } catch (Exception $e) {
             Log::error('Error fetching books: ' . $e->getMessage());
-            return response()->json(['error' => 'An error occurred while fetching books.'], 500);
+            return response()->json(['error' => 'An error occurred while fetching books:' . $e->getMessage()]);
         }
     }
 
@@ -48,7 +48,7 @@ class BookController extends Controller
             return response()->json($book, 201);
         } catch (Exception $e) {
             Log::error('Error storing book: ' . $e->getMessage());
-            return response()->json(['error' => 'An error occurred while storing the book.'], 500);
+            return response()->json(['error' => 'An error occurred while storing the book: ' . $e->getMessage()]);
         }
     }
 
@@ -64,7 +64,7 @@ class BookController extends Controller
             return response()->json($book);
         } catch (Exception $e) {
             Log::error('Error fetching book details: ' . $e->getMessage());
-            return response()->json(['error' => 'An error occurred while fetching book details.'], 500);
+            return response()->json(['error' => 'An error occurred while fetching book details: ' . $e->getMessage()]);
         }
     }
 
@@ -91,7 +91,7 @@ class BookController extends Controller
             return response()->json($book, 200);
         } catch (Exception $e) {
             Log::error('Error updating book: ' . $e->getMessage());
-            return response()->json(['error' => 'An error occurred while updating the book.'], 500);
+            return response()->json(['error' => 'An error occurred while updating the book: ' . $e->getMessage()]);
         }
     }
 
@@ -108,7 +108,7 @@ class BookController extends Controller
             return response()->json(null, 204);
         } catch (Exception $e) {
             Log::error('Error deleting book: ' . $e->getMessage());
-            return response()->json(['error' => 'An error occurred while deleting the book.'], 500);
+            return response()->json(['error' => 'An error occurred while deleting the book: ' . $e->getMessage()]);
         }
     }
 }
