@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
@@ -18,22 +19,22 @@ use App\Http\Controllers\UserController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+Route::post('/login', [AuthController::class, 'login']);
 
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware('auth:api')->group(function () {
 
+    // Books
+    Route::apiResource('books', BookController::class);
+
+    // Permissions
+    Route::apiResource('permissions', PermissionController::class);
+
+    // Reservations
+    Route::apiResource('reservations', ReservationController::class);
+
+    // Roles
+    Route::apiResource('roles', RoleController::class);
+
+    // Users
+    Route::apiResource('users', UserController::class);
 });
-
-// Books
-Route::apiResource('books', BookController::class);
-
-// Permissions
-Route::apiResource('permissions', PermissionController::class);
-
-// Reservations
-Route::apiResource('reservations', ReservationController::class);
-
-// Roles
-Route::apiResource('roles', RoleController::class);
-
-// Users
-Route::apiResource('users', UserController::class);

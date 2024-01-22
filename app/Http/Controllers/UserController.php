@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PersonalAccessToken;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Laravel\Passport\Token;
 
 class UserController extends Controller
 {
@@ -36,6 +39,18 @@ class UserController extends Controller
                 'email' => $validatedData['email'],
                 'password' => Hash::make($validatedData['password']),
                 'role_id' => $validatedData['role_id'],
+            ]);
+
+            $token = $user->createToken('API');
+
+            // Save the access token to the user
+            $user->access_token = $token->accessToken;
+            $user->save();
+
+            PersonalAccessToken::create([
+                'token' => $token->accessToken,
+                'user_id' => $user->id,
+                ''
             ]);
 
             return response()->json(['message' => 'User created successfully', 'user' => $user], 201);
