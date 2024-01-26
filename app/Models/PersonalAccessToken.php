@@ -15,14 +15,24 @@ class PersonalAccessToken extends Model
         'token',
         'user_id',
         'last_used_at',
+        'expires_at',
+        'tokenable_type',
+        'tokenable_id',
+        'name',
     ];
 
     protected $dates = [
         'last_used_at',
+        'expires_at',
     ];
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function tokenable()
+    {
+        return $this->morphTo();
     }
 }

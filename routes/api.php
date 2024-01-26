@@ -20,6 +20,8 @@ use App\Http\Controllers\UserController;
 |
 */
 
+Route::post('users', [UserController::class, 'store']);
+
 Route::middleware('auth:api')->group(function () {
 
     // Books
@@ -35,5 +37,5 @@ Route::middleware('auth:api')->group(function () {
     Route::apiResource('roles', RoleController::class);
 
     // Users
-    Route::apiResource('users', UserController::class);
+    Route::apiResource('users', UserController::class)->only(['index', 'show', 'update', 'destroy']);
 });

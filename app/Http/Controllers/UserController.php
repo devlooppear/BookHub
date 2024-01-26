@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\PersonalAccessToken;
 use App\Models\User;
+use App\Repositories\UserRepository;
+use App\Services\PersonalAccessTokenService;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,6 +15,15 @@ use Laravel\Passport\Token;
 
 class UserController extends Controller
 {
+    protected $userRepository;
+    protected $tokenService;
+
+    public function __construct(UserRepository $userRepository, PersonalAccessTokenService $tokenService)
+    {
+        $this->userRepository = $userRepository;
+        $this->tokenService = $tokenService;
+    }
+
     public function index()
     {
         try {
@@ -24,9 +35,11 @@ class UserController extends Controller
         }
     }
 
+
     public function store(Request $request)
     {
         try {
+            
             $validatedData = $request->validate([
                 'name' => 'required|string|max:255',
                 'email' => 'required|email|unique:users|max:255',
@@ -34,24 +47,22 @@ class UserController extends Controller
                 'role_id' => 'required|exists:roles,id',
             ]);
 
-            $user = User::create([
+            $user = $this->userRepository->create([
                 'name' => $validatedData['name'],
                 'email' => $validatedData['email'],
                 'password' => Hash::make($validatedData['password']),
                 'role_id' => $validatedData['role_id'],
             ]);
 
-            $token = $user->createToken('API');
-
-            // Save the access token to the user
-            $user->access_token = $token->accessToken;
-            $user->save();
-
-            PersonalAccessToken::create([
-                'token' => $token->accessToken,
+            $tokenData = [
+                'token' => $user->createToken('API')->accessToken,
                 'user_id' => $user->id,
-                ''
-            ]);
+                'tokenable_type' => get_class($user),
+                'tokenable_id' => $user->id,
+                'name' => 'API',
+            ];
+
+            $this->tokenService->createToken($tokenData);
 
             return response()->json(['message' => 'User created successfully', 'user' => $user], 201);
         } catch (Exception $e) {
