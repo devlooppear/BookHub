@@ -37,5 +37,6 @@ Route::middleware('auth:api')->group(function () {
     Route::apiResource('roles', RoleController::class);
 
     // Users
-    Route::apiResource('users', UserController::class)->only(['index', 'show', 'update', 'destroy']);
+    Route::apiResource('users', UserController::class)->only(['index', 'show', 'destroy']);
+    Route::post('users/{user}', [UserController::class, 'update']);
 });

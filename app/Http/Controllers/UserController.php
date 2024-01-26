@@ -27,7 +27,10 @@ class UserController extends Controller
     public function index()
     {
         try {
-            $users = User::with(['role', 'books'])->get();
+            $users = User::with(['role', 'books'])
+                ->orderBy('id', 'asc')
+                ->get();
+
             return response()->json($users);
         } catch (Exception $e) {
             Log::error('Error fetching users: ' . $e->getMessage());
@@ -35,11 +38,10 @@ class UserController extends Controller
         }
     }
 
-
     public function store(Request $request)
     {
         try {
-            
+
             $validatedData = $request->validate([
                 'name' => 'required|string|max:255',
                 'email' => 'required|email|unique:users|max:255',
@@ -85,21 +87,26 @@ class UserController extends Controller
     {
         try {
             $validatedData = $request->validate([
-                'name' => 'required|string|max:255',
-                'email' => 'required|email|unique:users,email,' . $user->id,
+                'name' => 'nullable|string|max:255',
+                'email' => 'nullable|email|unique:users,email,' . $user->id,
                 'password' => 'nullable|string|min:8',
-                'role_id' => 'required|exists:roles,id',
+                'role_id' => 'nullable|exists:roles,id',
             ]);
 
+            // Check if any non-null value is provided for update
+            if (!collect($validatedData)->filter(fn ($value) => $value !== null)->count()) {
+                throw new \Exception('No valid data provided for update.');
+            }
+
             $user->update([
-                'name' => $validatedData['name'],
-                'email' => $validatedData['email'],
+                'name' => $validatedData['name'] ?? $user->name,
+                'email' => $validatedData['email'] ?? $user->email,
                 'password' => $validatedData['password'] ? Hash::make($validatedData['password']) : $user->password,
-                'role_id' => $validatedData['role_id'],
+                'role_id' => $validatedData['role_id'] ?? $user->role_id,
             ]);
 
             return response()->json(['message' => 'User updated successfully', 'user' => $user]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             Log::error('Error updating user: ' . $e->getMessage());
             return response()->json(['error' => 'An error occurred while updating the user: ' . $e->getMessage()]);
         }
