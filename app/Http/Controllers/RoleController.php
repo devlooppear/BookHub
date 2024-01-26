@@ -36,7 +36,7 @@ class RoleController extends Controller
     {
         try {
             $request->validate([
-                'id' => 'required|number',
+                'id' => 'required|numeric',
                 'name' => 'required|string|unique:roles',
             ]);
 
@@ -76,7 +76,7 @@ class RoleController extends Controller
     {
         try {
             $request->validate([
-                'name' => 'string|unique:roles',
+                'name' => 'string|unique:roles,name,' . $role->id,
             ]);
 
             $role->update($request->all());
@@ -87,6 +87,8 @@ class RoleController extends Controller
             return response()->json(['error' => 'An error occurred while updating the role: ' . $e->getMessage()]);
         }
     }
+
+
 
     /**
      * Remove the specified role from storage.

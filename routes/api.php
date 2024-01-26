@@ -34,9 +34,11 @@ Route::middleware('auth:api')->group(function () {
     Route::apiResource('reservations', ReservationController::class);
 
     // Roles
-    Route::apiResource('roles', RoleController::class);
+    Route::apiResource('roles', RoleController::class)->only(['index', 'show', 'destroy', 'store']);
+    // Custom route for updating roles using POST
+    Route::post('roles/{role}', [RoleController::class, 'update']);
 
     // Users
-    Route::apiResource('users', UserController::class)->only(['index', 'show', 'destroy']);
+    Route::apiResource('users', UserController::class)->only(['index', 'show', 'destroy', 'store']);
     Route::post('users/{user}', [UserController::class, 'update']);
 });
