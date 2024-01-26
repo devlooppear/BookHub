@@ -93,9 +93,8 @@ class UserController extends Controller
                 'role_id' => 'nullable|exists:roles,id',
             ]);
 
-            // Check if any non-null value is provided for update
             if (!collect($validatedData)->filter(fn ($value) => $value !== null)->count()) {
-                throw new \Exception('No valid data provided for update.');
+                throw new Exception('No valid data provided for update.');
             }
 
             $user->update([
@@ -106,7 +105,7 @@ class UserController extends Controller
             ]);
 
             return response()->json(['message' => 'User updated successfully', 'user' => $user]);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             Log::error('Error updating user: ' . $e->getMessage());
             return response()->json(['error' => 'An error occurred while updating the user: ' . $e->getMessage()]);
         }
