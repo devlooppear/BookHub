@@ -101,7 +101,7 @@ class UserController extends Controller
                 'name' => $validatedData['name'] ?? $user->name,
                 'email' => $validatedData['email'] ?? $user->email,
                 'password' => $validatedData['password'] ? Hash::make($validatedData['password']) : $user->password,
-                'role_id' => $validatedData['role_id'] ?? $user->role_id,
+                'role_id' => intval($validatedData['role_id']) ?? intval($user->role_id),
             ]);
 
             return response()->json(['message' => 'User updated successfully', 'user' => $user]);
