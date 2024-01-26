@@ -31,7 +31,8 @@ Route::middleware('auth:api')->group(function () {
     Route::apiResource('permissions', PermissionController::class);
 
     // Reservations
-    Route::apiResource('reservations', ReservationController::class);
+    Route::apiResource('reservations', ReservationController::class)->only(['index', 'show', 'destroy', 'store']);
+    Route::post('reservations/{reservation}', [ReservationController::class, 'update']);
 
     // Roles
     Route::apiResource('roles', RoleController::class)->only(['index', 'show', 'destroy', 'store']);

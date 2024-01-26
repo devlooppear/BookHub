@@ -18,7 +18,7 @@ class ReservationController extends Controller
     public function index()
     {
         try {
-            $reservations = Reservation::with(['user','book'])->get();
+            $reservations = Reservation::with(['user', 'book'])->get();
             return response()->json($reservations);
         } catch (Exception $e) {
             Log::error('Error fetching reservations: ' . $e->getMessage());
@@ -79,14 +79,33 @@ class ReservationController extends Controller
     {
         try {
             $request->validate([
-                'user_id' => 'exists:users,id',
-                'book_id' => 'exists:books,id',
+                'user_id' => 'nullable|exists:users,id|integer',
+                'book_id' => 'nullable|exists:books,id|integer',
                 'reservation_date' => 'date',
                 'pickup_deadline' => 'date',
-                'is_active' => 'boolean',
+                'is_active' => 'nullable|numeric|in:0,1',
             ]);
 
-            $reservation->update($request->all());
+            // Convert user_id and book_id to integers
+            $user_id = $request->input('user_id');
+            $book_id = $request->input('book_id');
+
+            if (!is_null($user_id)) {
+                $request->merge(['user_id' => intval($user_id)]);
+            }
+
+            if (!is_null($book_id)) {
+                $request->merge(['book_id' => intval($book_id)]);
+            }
+
+            // Convert is_active to integer
+            $is_active = $request->input('is_active');
+            if (!is_null($is_active)) {
+                $request->merge(['is_active' => intval($is_active)]);
+            }
+
+            // Use fill method instead of update to only update the provided fields
+            $reservation->fill($request->all())->save();
 
             return response()->json($reservation, 200);
         } catch (Exception $e) {
