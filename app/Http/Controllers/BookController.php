@@ -42,6 +42,9 @@ class BookController extends Controller
                 'availability' => 'boolean',
             ]);
 
+            // Convert availability to an integer using intval
+            $request->merge(['availability' => intval($request->input('availability'))]);
+
             $book = Book::create($request->all());
 
             return response()->json($book, 201);
@@ -81,7 +84,7 @@ class BookController extends Controller
                 'title' => 'string|max:255',
                 'author' => 'string|max:255',
                 'category' => 'string|max:255',
-                'availability' => 'boolean', 
+                'availability' => 'boolean',
             ]);
 
             $request->merge(['availability' => intval($request->input('availability'))]);
