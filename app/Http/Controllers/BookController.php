@@ -78,11 +78,13 @@ class BookController extends Controller
     {
         try {
             $request->validate([
-                'title' => 'string',
-                'author' => 'string',
-                'category' => 'string',
-                'availability' => 'boolean',
+                'title' => 'string|max:255',
+                'author' => 'string|max:255',
+                'category' => 'string|max:255',
+                'availability' => 'boolean', 
             ]);
+
+            $request->merge(['availability' => intval($request->input('availability'))]);
 
             $book->update($request->all());
 
@@ -92,6 +94,7 @@ class BookController extends Controller
             return response()->json(['error' => 'An error occurred while updating the book: ' . $e->getMessage()]);
         }
     }
+
 
     /**
      * Remove the specified book from storage.

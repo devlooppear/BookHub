@@ -26,7 +26,8 @@ Route::post('users', [UserController::class, 'store']);
 Route::middleware('auth:api')->group(function () {
 
     // Books
-    Route::apiResource('books', BookController::class);
+    Route::apiResource('books', BookController::class)->only(['index', 'show', 'destroy', 'store']);
+    Route::post('books/{book}', [BookController::class, 'update']);
 
     // Permissions
     Route::apiResource('permissions', PermissionController::class)->only(['index', 'show', 'destroy', 'store']);
