@@ -85,7 +85,6 @@ class PermissionController extends Controller
             return response()->json(['error' => 'An error occurred while updating the permission: ' . $e->getMessage()]);
         }
     }
-
     /**
      * Remove the specified permission from storage.
      *

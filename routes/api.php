@@ -8,6 +8,7 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Models\Permission;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +29,8 @@ Route::middleware('auth:api')->group(function () {
     Route::apiResource('books', BookController::class);
 
     // Permissions
-    Route::apiResource('permissions', PermissionController::class);
+    Route::apiResource('permissions', PermissionController::class)->only(['index', 'show', 'destroy', 'store']);
+    Route::post('permissions/{permission}', [PermissionController::class, 'update']);
 
     // Reservations
     Route::apiResource('reservations', ReservationController::class)->only(['index', 'show', 'destroy', 'store']);
