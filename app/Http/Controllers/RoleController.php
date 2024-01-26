@@ -18,7 +18,8 @@ class RoleController extends Controller
     public function index()
     {
         try {
-            $roles = Role::all();
+            $roles = Role::all()
+            ->orderBy('id','asc');
             return response()->json($roles);
         } catch (Exception $e) {
             Log::error('Error fetching roles: ' . $e->getMessage());

@@ -18,7 +18,7 @@ class BookController extends Controller
     public function index()
     {
         try {
-            $books = Book::with('users')->get();
+            $books = Book::with('users')->orderBy('id', 'asc')->get();
             return response()->json($books);
         } catch (Exception $e) {
             Log::error('Error fetching books: ' . $e->getMessage());

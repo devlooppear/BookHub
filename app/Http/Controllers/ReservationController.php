@@ -18,7 +18,10 @@ class ReservationController extends Controller
     public function index()
     {
         try {
-            $reservations = Reservation::with(['user', 'book'])->get();
+            $reservations = Reservation::with(['user', 'book'])
+                ->orderBy('id', 'asc')
+                ->get();
+
             return response()->json($reservations);
         } catch (Exception $e) {
             Log::error('Error fetching reservations: ' . $e->getMessage());
@@ -36,14 +39,19 @@ class ReservationController extends Controller
     {
         try {
             $request->validate([
-                'user_id' => 'required|exists:users,id',
-                'book_id' => 'required|exists:books,id',
+                'user_id' => 'required|integer|exists:users,id',
+                'book_id' => 'required|integer|exists:books,id',
                 'reservation_date' => 'required|date',
                 'pickup_deadline' => 'required|date',
                 'is_active' => 'boolean',
             ]);
 
-            $reservation = Reservation::create($request->all());
+            $data = $request->all();
+            $data['user_id'] = intval($data['user_id']);
+            $data['book_id'] = intval($data['book_id']);
+            $data['is_active'] = intval($data['is_active']);
+
+            $reservation = Reservation::create($data);
 
             return response()->json($reservation, 201);
         } catch (Exception $e) {
@@ -51,6 +59,7 @@ class ReservationController extends Controller
             return response()->json(['error' => 'An error occurred while storing the reservation: ' . $e->getMessage()]);
         }
     }
+
 
     /**
      * Display the specified reservation.

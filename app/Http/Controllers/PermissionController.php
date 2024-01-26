@@ -17,7 +17,7 @@ class PermissionController extends Controller
     public function index()
     {
         try {
-            $permissions = Permission::all();
+            $permissions = Permission::orderBy('id', 'asc')->get();
             return response()->json($permissions);
         } catch (Exception $e) {
             Log::error('Error fetching permissions: ' . $e->getMessage());

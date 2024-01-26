@@ -53,7 +53,7 @@ class UserController extends Controller
                 'name' => $validatedData['name'],
                 'email' => $validatedData['email'],
                 'password' => Hash::make($validatedData['password']),
-                'role_id' => $validatedData['role_id'],
+                'role_id' => intval($validatedData['role_id']),
             ]);
 
             $tokenData = [
