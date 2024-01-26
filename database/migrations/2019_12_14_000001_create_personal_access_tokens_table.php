@@ -15,6 +15,11 @@ return new class extends Migration
             $table->id();
             $table->text('token')->unique();
             $table->unsignedBigInteger('user_id');
+            $table->morphs('tokenable');
+            $table->string('name');
+            $table->text('abilities')->nullable();
+            $table->timestamp('last_used_at')->nullable();
+            $table->timestamp('expires_at')->nullable();
             $table->timestamps();
         });
     }
