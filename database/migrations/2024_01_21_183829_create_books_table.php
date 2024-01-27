@@ -13,7 +13,7 @@ class CreateBooksTable extends Migration
             $table->string('title');
             $table->string('author');
             $table->string('category');
-            $table->boolean('availability')->default(true);
+            $table->boolean('availability')->default(1);
             $table->timestamps();
         });
     }

@@ -27,14 +27,14 @@ class PermissionIndexTest extends TestCase
 
         $response->assertStatus(200);
 
-        $response->assertJsonCount(3, 'data');
+        $data = $response->json();
+
+        $this->assertCount(3, $data);
 
         $response->assertJsonStructure([
-            'data' => [
-                '*' => [
-                    'id',
-                    'name',
-                ],
+            '*' => [
+                'id',
+                'name',
             ],
         ]);
     }

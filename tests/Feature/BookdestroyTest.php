@@ -21,12 +21,19 @@ class BookDestroyTest extends TestCase
         $user = User::factory()->create();
         Passport::actingAs($user);
 
+        
         $book = Book::factory()->create();
 
+        
+        $this->assertDatabaseHas('books', ['id' => $book->id]);
+
+        
         $response = $this->delete("/api/books/{$book->id}");
 
+        
         $response->assertStatus(204);
 
+        
         $this->assertDatabaseMissing('books', ['id' => $book->id]);
     }
 
@@ -35,12 +42,22 @@ class BookDestroyTest extends TestCase
      */
     public function testDestroyBookForUnauthenticatedUser(): void
     {
+        
         $book = Book::factory()->create();
 
+        
+        $initialBookCount = Book::count();
+
+        
         $response = $this->delete("/api/books/{$book->id}");
 
+        
         $response->assertStatus(401);
 
+        
         $this->assertDatabaseHas('books', ['id' => $book->id]);
+
+        
+        $this->assertEquals($initialBookCount, Book::count());
     }
 }

@@ -26,6 +26,7 @@ class BookstoreTest extends TestCase
             'title' => 'Sample Book',
             'author' => 'Sample Author',
             'category' => 'Sample Category',
+            'availability' => 1,
         ];
 
         $response = $this->post('/api/books', $bookData);
@@ -54,6 +55,9 @@ class BookstoreTest extends TestCase
         Passport::actingAs($user);
 
         $invalidBookData = [
+            'title' => 437856739,
+            'author' => true,
+            'category' => 5.7,
         ];
 
         $response = $this->post('/api/books', $invalidBookData);

@@ -28,9 +28,15 @@ class ReservationIndexTest extends TestCase
 
         $response->assertStatus(200);
 
-        $response->assertJsonCount(count($reservations), 'data');
+        $this->assertCount(count($reservations), $response->json());
 
+        foreach ($reservations as $reservation) {
+            $response->assertJsonFragment([
+                'id' => $reservation->id,
+            ]);
+        }
     }
+
 
     /**
      * Test fetching reservations with authentication failure.
@@ -40,6 +46,5 @@ class ReservationIndexTest extends TestCase
         $response = $this->get('/api/reservations');
 
         $response->assertStatus(401);
-
     }
 }

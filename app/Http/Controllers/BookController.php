@@ -7,6 +7,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\ValidationException;
 
 class BookController extends Controller
 {
@@ -39,15 +40,14 @@ class BookController extends Controller
                 'title' => 'required|string',
                 'author' => 'required|string',
                 'category' => 'required|string',
-                'availability' => 'boolean',
+                'availability' => 'required|boolean|in:0,1',
             ]);
-
-            // Convert availability to an integer using intval
-            $request->merge(['availability' => intval($request->input('availability'))]);
 
             $book = Book::create($request->all());
 
             return response()->json($book, 201);
+        } catch (ValidationException $e) {
+            return response()->json(['error' => $e->validator->errors()], 422);
         } catch (Exception $e) {
             Log::error('Error storing book: ' . $e->getMessage());
             return response()->json(['error' => 'An error occurred while storing the book: ' . $e->getMessage()]);

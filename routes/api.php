@@ -43,6 +43,6 @@ Route::middleware('auth:api')->group(function () {
     Route::post('roles/{role}', [RoleController::class, 'update']);
 
     // Users
-    Route::apiResource('users', UserController::class)->only(['index', 'show', 'destroy', 'store']);
+    Route::apiResource('users', UserController::class)->only(['index', 'show', 'destroy']);
     Route::post('users/{user}', [UserController::class, 'update']);
 });

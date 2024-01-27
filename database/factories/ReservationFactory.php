@@ -21,7 +21,7 @@ class ReservationFactory extends Factory
             'book_id' => $book->id,
             'reservation_date' => $this->faker->dateTimeBetween('-1 month', '+1 month'),
             'pickup_deadline' => $this->faker->dateTimeBetween('+1 day', '+2 weeks'),
-            'is_active' => $this->faker->boolean(80),
+            'is_active' => $this->faker->boolean(),
         ];
     }
 }
