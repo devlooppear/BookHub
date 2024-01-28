@@ -24,6 +24,18 @@ after active the passport like:
 
 ./vendor/bin/sail artisan passport:install --force
 
+## Usando Mailtrap:
+
+você pode verificar o envio de e-mail ao registrar um usuário com:
+
+```
+./vendor/bin/sail artisan queue:work
+```
+
+e acessando: http://localhost:8025
+
+eu particularmente prefiro usar o mailtrap, para isso, acesse `https://mailtrap.io/`, logue, vá em 'Email Testing', crie um novo Inbox, acesse ele e em integrações coloque 'PHP 9+', depois adapte as credenciais no seu .env
+
 # Usuários e Bibliotecários (Users):
 
  ### Atributos:

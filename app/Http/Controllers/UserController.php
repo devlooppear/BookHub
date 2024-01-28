@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendUserRegistrationEmail;
 use App\Models\PersonalAccessToken;
 use App\Models\User;
 use App\Repositories\UserRepository;
@@ -66,6 +67,8 @@ class UserController extends Controller
 
             $this->tokenService->createToken($tokenData);
 
+            dispatch(new SendUserRegistrationEmail($user));
+
             return response()->json(['message' => 'User created successfully', 'user' => $user], 201);
         } catch (ValidationException $e) {
             // Handle validation errors
@@ -75,6 +78,7 @@ class UserController extends Controller
             return response()->json(['error' => 'An error occurred while creating the user: ' . $e->getMessage()]);
         }
     }
+
 
     public function show(User $user)
     {
