@@ -13,19 +13,27 @@ class RoleController extends Controller
     /**
      * Display a listing of the roles.
      *
-     * @return Response
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         try {
-            $roles = Role::all()
-            ->orderBy('id','asc');
+            $query = Role::orderBy('id', 'asc');
+
+            if ($request->has('page')) {
+                $roles = $query->paginate(18);
+            } else {
+                $roles = $query->get();
+            }
+
             return response()->json($roles);
         } catch (Exception $e) {
             Log::error('Error fetching roles: ' . $e->getMessage());
             return response()->json(['error' => 'An error occurred while fetching roles: ' . $e->getMessage()]);
         }
     }
+
 
     /**
      * Store a newly created role in storage.

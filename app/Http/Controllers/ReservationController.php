@@ -16,14 +16,19 @@ class ReservationController extends Controller
     /**
      * Display a listing of the reservations.
      *
-     * @return Response
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         try {
-            $reservations = Reservation::with(['user', 'book'])
-                ->orderBy('id', 'asc')
-                ->get();
+            $query = Reservation::with(['user', 'book'])->orderBy('id', 'asc');
+
+            if ($request->has('page')) {
+                $reservations = $query->paginate(18);
+            } else {
+                $reservations = $query->get();
+            }
 
             return response()->json($reservations);
         } catch (Exception $e) {
@@ -31,7 +36,6 @@ class ReservationController extends Controller
             return response()->json(['error' => 'An error occurred while fetching reservations: ' . $e->getMessage()]);
         }
     }
-
 
     /**
      * Store a newly created reservation in storage.

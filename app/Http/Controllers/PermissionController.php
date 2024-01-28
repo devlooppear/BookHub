@@ -12,18 +12,27 @@ class PermissionController extends Controller
     /**
      * Display a listing of the permissions.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         try {
-            $permissions = Permission::orderBy('id', 'asc')->get();
+            $query = Permission::orderBy('id', 'asc');
+
+            if ($request->has('page')) {
+                $permissions = $query->paginate(18);
+            } else {
+                $permissions = $query->get();
+            }
+
             return response()->json($permissions);
         } catch (Exception $e) {
             Log::error('Error fetching permissions: ' . $e->getMessage());
             return response()->json(['error' => 'An error occurred while fetching permissions: ' . $e->getMessage()]);
         }
     }
+
 
     /**
      * Store a newly created permission in storage.

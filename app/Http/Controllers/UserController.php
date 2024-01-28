@@ -26,12 +26,22 @@ class UserController extends Controller
         $this->tokenService = $tokenService;
     }
 
-    public function index()
+    /**
+     * Display a listing of the users.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request)
     {
         try {
-            $users = User::with(['role', 'books'])
-                ->orderBy('id', 'asc')
-                ->get();
+            $query = User::with(['role', 'books'])->orderBy('id', 'asc');
+
+            if ($request->has('page')) {
+                $users = $query->paginate(18);
+            } else {
+                $users = $query->get();
+            }
 
             return response()->json($users);
         } catch (Exception $e) {
@@ -39,6 +49,7 @@ class UserController extends Controller
             return response()->json(['error' => 'An error occurred while fetching users: ' . $e->getMessage()]);
         }
     }
+
 
     public function store(Request $request)
     {
