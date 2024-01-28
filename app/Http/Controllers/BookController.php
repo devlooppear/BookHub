@@ -16,16 +16,51 @@ class BookController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
         try {
-            $books = Book::with('users')->orderBy('id', 'asc')->get();
+            $query = Book::with('users')->orderBy('id', 'asc');
+
+            if ($request->has('title')) {
+                $title = $request->input('title');
+                $titlePattern = '%' . str_replace(' ', '%', $title) . '%';
+                $query->where('title', 'ilike', $titlePattern);
+            }
+
+            if ($request->has('author')) {
+                $author = $request->input('author');
+                $authorPattern = '%' . str_replace(' ', '%', $author) . '%';
+                $query->where('author', 'ilike', $authorPattern);
+            }
+
+            if ($request->has('category')) {
+                $category = $request->input('category');
+                $categoryPattern = '%' . str_replace(' ', '%', $category) . '%';
+                $query->where('category', 'ilike', $categoryPattern);
+            }
+
+            if ($request->has('isbn')) {
+                $isbn = $request->input('isbn');
+                $isbnPattern = '%' . str_replace(' ', '%', $isbn) . '%';
+                $query->where('isbn', 'ilike', $isbnPattern);
+            }
+
+            $perPage = $request->input('perPage', 18);
+
+            if ($request->has('page')) {
+                $books = $query->paginate($perPage);
+            } else {
+                $books = $query->get();
+            }
+
             return response()->json($books);
         } catch (Exception $e) {
             Log::error('Error fetching books: ' . $e->getMessage());
             return response()->json(['error' => 'An error occurred while fetching books:' . $e->getMessage()]);
         }
     }
+
+
 
     /**
      * Store a newly created book in storage.
