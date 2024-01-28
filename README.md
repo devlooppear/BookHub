@@ -4,61 +4,63 @@ O BookHub é um sistema de reserva de biblioteca que gerencia usuários, bibliot
 
 ## Tecnologias Utilizadas
 
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px;">
-    <div>
-        <h3>Framework</h3>
-        <p align="center">
-            <img src="https://img.shields.io/badge/Laravel-10-orange?style=flat-square&logo=laravel&logoColor=white" alt="Laravel">
-        </p>
+<html>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px;">
+        <div>
+            <h3>Framework</h3>
+            <p align="center">
+                <img src="https://img.shields.io/badge/Laravel-10-orange?style=flat-square&logo=laravel&logoColor=white" alt="Laravel">
+            </p>
+        </div>
+        <div>
+            <h3>Banco de Dados</h3>
+            <p align="center">
+                <img src="https://img.shields.io/badge/PostgreSQL-15-blue?style=flat-square&logo=postgresql&logoColor=white" alt="PostgreSQL">
+            </p>
+        </div>
+        <div>
+            <h3>Cache</h3>
+            <p align="center">
+                <img src="https://img.shields.io/badge/Redis-Alpine-red?style=flat-square&logo=redis&logoColor=white" alt="Redis">
+            </p>
+        </div>
+        <div>
+            <h3>Serviço de Teste de Email</h3>
+            <p align="center">
+                <img src="https://img.shields.io/badge/Mailtrap-00cc99?style=flat-square&logo=mailtrap&logoColor=white" alt="Mailtrap">
+            </p>
+        </div>
+        <div>
+            <h3>Ambiente de Desenvolvimento</h3>
+            <p align="center">
+                <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white" alt="Docker">
+                <img src="https://img.shields.io/badge/Sail-black?style=flat-square&logo=laravel&logoColor=white" alt="Sail">
+            </p>
+        </div>
+        <div>
+            <h3>Gerenciador de Pacotes</h3>
+            <p align="center">
+                <img src="https://img.shields.io/badge/Composer-885630?style=flat-square&logo=composer&logoColor=white" alt="Composer">
+            </p>
+        </div>
+        <div>
+            <h3>Ferramentas de Implantação</h3>
+            <p align="center">
+                <img src="https://img.shields.io/badge/Passport-6DB33F?style=flat-square&logo=laravel&logoColor=white" alt="Passport">
+            </p>
+        </div>
+        <div>
+            <h3>Outros</h3>
+            <p align="center">
+                <img src="https://img.shields.io/badge/PHPUnit-555?style=flat-square&logo=phpunit&logoColor=white" alt="PHPUnit">
+                <img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white" alt="Git">
+                <img src="https://img.shields.io/badge/PHPDoc-8892BF?style=flat-square&logo=php&logoColor=white" alt="PHPDoc">
+                <img src="https://img.shields.io/badge/Insomnia-5849BE?style=flat-square&logo=insomnia&logoColor=white" alt="Insomnia">
+                <img src="https://img.shields.io/badge/GitHub%20Actions-2088FF?style=flat-square&logo=githubactions&logoColor=white" alt="GitHub Actions">
+            </p>
+        </div>
     </div>
-    <div>
-        <h3>Banco de Dados</h3>
-        <p align="center">
-            <img src="https://img.shields.io/badge/PostgreSQL-15-blue?style=flat-square&logo=postgresql&logoColor=white" alt="PostgreSQL">
-        </p>
-    </div>
-    <div>
-        <h3>Cache</h3>
-        <p align="center">
-            <img src="https://img.shields.io/badge/Redis-Alpine-red?style=flat-square&logo=redis&logoColor=white" alt="Redis">
-        </p>
-    </div>
-    <div>
-        <h3>Serviço de Teste de Email</h3>
-        <p align="center">
-            <img src="https://img.shields.io/badge/Mailtrap-00cc99?style=flat-square&logo=mailtrap&logoColor=white" alt="Mailtrap">
-        </p>
-    </div>
-    <div>
-        <h3>Ambiente de Desenvolvimento</h3>
-        <p align="center">
-            <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white" alt="Docker">
-            <img src="https://img.shields.io/badge/Sail-black?style=flat-square&logo=laravel&logoColor=white" alt="Sail">
-        </p>
-    </div>
-    <div>
-        <h3>Gerenciador de Pacotes</h3>
-        <p align="center">
-            <img src="https://img.shields.io/badge/Composer-885630?style=flat-square&logo=composer&logoColor=white" alt="Composer">
-        </p>
-    </div>
-    <div>
-        <h3>Ferramentas de Implantação</h3>
-        <p align="center">
-            <img src="https://img.shields.io/badge/Passport-6DB33F?style=flat-square&logo=laravel&logoColor=white" alt="Passport">
-        </p>
-    </div>
-    <div>
-        <h3>Outros</h3>
-        <p align="center">
-            <img src="https://img.shields.io/badge/PHPUnit-555?style=flat-square&logo=phpunit&logoColor=white" alt="PHPUnit">
-            <img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white" alt="Git">
-            <img src="https://img.shields.io/badge/PHPDoc-8892BF?style=flat-square&logo=php&logoColor=white" alt="PHPDoc">
-            <img src="https://img.shields.io/badge/Insomnia-5849BE?style=flat-square&logo=insomnia&logoColor=white" alt="Insomnia">
-            <img src="https://img.shields.io/badge/GitHub%20Actions-2088FF?style=flat-square&logo=githubactions&logoColor=white" alt="GitHub Actions">
-        </p>
-    </div>
-</div>
+</html>
 
 ## Primeiros passos:
 
@@ -101,6 +103,33 @@ Você pode verificar o envio de e-mail ao registrar um usuário com:
 E acesse: http://localhost:8025
 
 Particularmente, prefiro usar o Mailtrap. Para isso, acesse Mailtrap, faça login, vá em 'Email Testing', crie uma nova Inbox, acesse-a e em integrações, selecione 'PHP 9+'. Em seguida, adapte as credenciais no seu arquivo .env.
+
+## Gerenciamento de Jobs:
+
+Para otimizar e gerenciar a execução de jobs na aplicação, adotei o Laravel Horizon. Essa ferramenta proporciona:
+
+<html>
+<div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 16px;">
+    <h2>Laravel Horizon</h2>
+    <div style=" padding: 16px; text-align: center;">
+        <img src="img-doc/LaravelHorizon.png" alt="LaravelHorizon" style="max-width: 88%; border-radius: 8px;">
+    </div>
+</div>
+</html>
+
+-   `Visualização Intuitiva`: Tenha uma visão clara e intuitiva do desempenho de suas filas de jobs por meio do painel de controle do Horizon.
+
+-   `Monitoramento em Tempo Real`: Acompanhe em tempo real a execução de jobs, identificando gargalos e otimizando o desempenho do seu sistema.
+
+-   `Gerenciamento Eficiente`: Controle o comportamento das filas, suspenda e retome a execução de jobs, e ajuste configurações conforme necessário.
+
+O Laravel Horizon proporciona uma solução robusta para monitorar e otimizar o processamento de jobs, garantindo a eficiência e confiabilidade de sua aplicação Laravel. Para executar use:
+
+``` 
+./vendor/bin/sail artisan horizon
+```
+
+Para executar
 
 ## Swoole Integration
 
@@ -156,29 +185,31 @@ Os testes que realizei foram em relação aos controllers, mas é possível aume
 
 ## (Notificações)
 
-<div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 16px;">
-    <h2>Notificações aos usuários com 'role_id' === 2 (Bibliotecários): Criação de Reserva</h2>
-    <div style=" padding: 16px; text-align: center;">
-        <img src="img-doc/CreateReservationNotify.png" alt="CreateReservationNotify" style="max-width: 88%; border-radius: 8px;">
+<html>
+    <div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 16px;">
+        <h2>Notificações aos usuários com 'role_id' === 2 (Bibliotecários): Criação de Reserva</h2>
+        <div style=" padding: 16px; text-align: center;">
+            <img src="img-doc/CreateReservationNotify.png" alt="CreateReservationNotify" style="max-width: 88%; border-radius: 8px;">
+        </div>
+            <h2>Notificações aos usuários com 'role_id' === 2 (Bibliotecários): Atualização de Reserva</h2>
+        <div style=" padding: 16px; text-align: center;">
+            <img src="img-doc/UpdateReservationNotify.png" alt="UpdateReservationNotify" style="max-width: 88%; border-radius: 8px;">
+        </div>
+            <h2>Notificações aos usuários com 'role_id' === 2 (Bibliotecários): Deleção de Reserva</h2>
+        <div style=" padding: 16px; text-align: center;">
+            <img src="img-doc/DeletedResernationNotify.png" alt="DeletedResernationNotify" style="max-width: 88%; border-radius: 8px;">
+        </div>
+            <h2>Diagrama do Banco</h2>
+        <div style=" padding: 16px; text-align: center;">
+            <img src="img-doc/DBDiagram.png" alt="DBDiagram" style="max-width: 88%; border-radius: 8px;">
+        </div>
+            <h2>Registro de Usuário</h2>
+        <div style=" padding: 16px; text-align: center;">
+            <img src="img-doc/RegistredMail.png" alt="RegistredMail" style="max-width: 88%; border-radius: 8px;">
+        </div>
     </div>
-        <h2>Notificações aos usuários com 'role_id' === 2 (Bibliotecários): Atualização de Reserva</h2>
-    <div style=" padding: 16px; text-align: center;">
-        <img src="img-doc/UpdateReservationNotify.png" alt="UpdateReservationNotify" style="max-width: 88%; border-radius: 8px;">
-    </div>
-        <h2>Notificações aos usuários com 'role_id' === 2 (Bibliotecários): Deleção de Reserva</h2>
-    <div style=" padding: 16px; text-align: center;">
-        <img src="img-doc/DeletedResernationNotify.png" alt="DeletedResernationNotify" style="max-width: 88%; border-radius: 8px;">
-    </div>
-        <h2>Diagrama do Banco</h2>
-    <div style=" padding: 16px; text-align: center;">
-        <img src="img-doc/DBDiagram.png" alt="DBDiagram" style="max-width: 88%; border-radius: 8px;">
-    </div>
-        <h2>Registro de Usuário</h2>
-    <div style=" padding: 16px; text-align: center;">
-        <img src="img-doc/RegistredMail.png" alt="RegistredMail" style="max-width: 88%; border-radius: 8px;">
-    </div>
+</html>
 
-</div>
 
 ## Usuários e Bibliotecários (Users):
 
