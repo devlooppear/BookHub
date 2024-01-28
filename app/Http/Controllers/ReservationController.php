@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ReservationEvent;
 use App\Models\Reservation;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -31,6 +32,7 @@ class ReservationController extends Controller
         }
     }
 
+
     /**
      * Store a newly created reservation in storage.
      *
@@ -55,16 +57,20 @@ class ReservationController extends Controller
 
             $reservation = Reservation::create($data);
 
-            return response()->json($reservation, 201);
-        } catch (ValidationException $e) {
-            return response()->json(['error' => $e->errors()], 422);
-        } catch (Exception $e) {
-            Log::error('Error storing reservation: ' . $e->getMessage());
+            try {
+                event(new ReservationEvent($reservation->toArray(), 'created'));
+            } catch (Exception $eventException) {
+                Log::error('Error triggering reservation event: ' . $eventException->getMessage());
+            }
 
+            return response()->json(['data' => $reservation], 201);
+        } catch (ValidationException $validationException) {
+            return response()->json(['error' => $validationException->getMessage()], 422);
+        } catch (Exception $exception) {
+            Log::error('Error storing reservation: ' . $exception->getMessage());
             return response()->json(['error' => 'An error occurred while storing the reservation.'], 500);
         }
     }
-
 
     /**
      * Display the specified reservation.
@@ -100,9 +106,9 @@ class ReservationController extends Controller
                 'is_active' => 'nullable|numeric|in:0,1',
             ]);
 
-            // Convert user_id and book_id to integers
             $user_id = $request->input('user_id');
             $book_id = $request->input('book_id');
+            $is_active = $request->input('is_active');
 
             if (!is_null($user_id)) {
                 $request->merge(['user_id' => intval($user_id)]);
@@ -112,16 +118,25 @@ class ReservationController extends Controller
                 $request->merge(['book_id' => intval($book_id)]);
             }
 
-            // Use fill method instead of update to only update the provided fields
+            if (!is_null($is_active)) {
+                $request->merge(['is_active' => intval($is_active)]);
+            }
+
             $reservation->fill($request->all())->save();
 
+            try {
+                event(new ReservationEvent($reservation->toArray(), 'updated'));
+            } catch (Exception $eventException) {
+                Log::error('Error triggering reservation event: ' . $eventException->getMessage());
+            }
+
             return response()->json($reservation, 200);
-        } catch (ValidationException $e) {
-            return response()->json(['error' => $e->errors()], 422);
-        } catch (ModelNotFoundException $e) {
+        } catch (ValidationException $validationException) {
+            return response()->json(['error' => $validationException->errors()], 422);
+        } catch (ModelNotFoundException $modelNotFoundException) {
             return response()->json(['error' => 'Reservation not found.'], 404);
-        } catch (Exception $e) {
-            Log::error('Error updating reservation: ' . $e->getMessage());
+        } catch (Exception $exception) {
+            Log::error('Error updating reservation: ' . $exception->getMessage());
             return response()->json(['error' => 'An error occurred while updating the reservation.'], 500);
         }
     }
@@ -130,16 +145,24 @@ class ReservationController extends Controller
      * Remove the specified reservation from storage.
      *
      * @param  Reservation  $reservation
-     * @return Response
+     * @return JsonResponse
      */
     public function destroy(Reservation $reservation)
     {
         try {
             $reservation->delete();
-            return response()->json(null, 204);
-        } catch (Exception $e) {
-            Log::error('Error deleting reservation: ' . $e->getMessage());
-            return response()->json(['error' => 'An error occurred while deleting the reservation: ' . $e->getMessage()]);
+
+            try {
+                event(new ReservationEvent($reservation->toArray(), 'deleted'));
+            } catch (Exception $eventException) {
+                Log::error('Error triggering reservation event: ' . $eventException->getMessage());
+            }
+
+            return response()->json(['message' => 'Reservation successfully deleted'], 200);
+        } catch (Exception $exception) {
+            Log::error('Error deleting reservation: ' . $exception->getMessage());
+
+            return response()->json(['error' => 'Failed to delete the reservation. Please try again.'], 500);
         }
     }
 }
