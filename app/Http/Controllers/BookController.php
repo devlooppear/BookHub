@@ -45,6 +45,12 @@ class BookController extends Controller
                 $query->where('isbn', 'ilike', $isbnPattern);
             }
 
+            // Filter by availability
+            if ($request->has('availability')) {
+                $availability = $request->input('availability');
+                $query->where('availability', $availability);
+            }
+
             $perPage = $request->input('perPage', 18);
 
             if ($request->has('page')) {
@@ -59,8 +65,6 @@ class BookController extends Controller
             return response()->json(['error' => 'An error occurred while fetching books:' . $e->getMessage()]);
         }
     }
-
-
 
     /**
      * Store a newly created book in storage.

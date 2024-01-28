@@ -36,6 +36,37 @@ e acessando: http://localhost:8025
 
 eu particularmente prefiro usar o mailtrap, para isso, acesse `https://mailtrap.io/`, logue, vá em 'Email Testing', crie um novo Inbox, acesse ele e em integrações coloque 'PHP 9+', depois adapte as credenciais no seu .env
 
+## Filtros
+
+para acessar os livros sem filtros, use a url:
+
+http://localhost/api/books
+
+para paginação coloque o query param, como:
+
+http://localhost/api/books?page=1
+
+para filtro, você pode usar:
+
+### Para titulo:
+
+http://localhost/api/books?title=%Seu%Titulo
+
+### Para Autor:
+
+http://localhost/api/books?author=%Seu%Autor
+
+### Para ISBN:
+
+http://localhost/api/books?isbn=%97812345%
+
+- Você também pode combina-los com '&'
+
+### Para livros disponíveis:
+
+http://localhost/api/books?availability=1
+
+
 # Usuários e Bibliotecários (Users):
 
  ### Atributos:
