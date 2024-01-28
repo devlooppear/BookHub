@@ -30,9 +30,10 @@ class ReservationStoreTest extends TestCase
      */
     public function testStoreReservationWithAuthentication(): void
     {
-        $book = Book::factory()->create();
+        $reservation = Reservation::factory()->create();
 
-        $user = User::factory()->create();
+        $user = $reservation->user;
+        $book = $reservation->book;
 
         Passport::actingAs($user);
 
@@ -48,14 +49,24 @@ class ReservationStoreTest extends TestCase
 
         $response->assertSuccessful()
             ->assertJsonStructure([
-                'user_id',
-                'book_id',
-                'reservation_date',
-                'pickup_deadline',
-                'is_active',
-                'created_at',
-                'updated_at',
+                'data' => [
+                    'user_id',
+                    'book_id',
+                    'reservation_date',
+                    'pickup_deadline',
+                    'is_active',
+                    'created_at',
+                    'updated_at',
+                ]
             ])
-            ->assertJson($requestData);
+            ->assertJson([
+                'data' => [
+                    'user_id' => $user->id,
+                    'book_id' => $book->id,
+                    'reservation_date' => '2024-01-26T23:54:04',
+                    'pickup_deadline' => '2024-02-02T23:54:04',
+                    'is_active' => 1,
+                ]
+            ]);
     }
 }
