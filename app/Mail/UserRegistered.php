@@ -20,6 +20,6 @@ class UserRegistered extends Mailable
 
     public function build()
     {
-        return $this->subject('Welcome to YourApp')->view('emails.user_registered');
+        return $this->subject('Welcome to BookHub')->view('emails.user_registered');
     }
 }
