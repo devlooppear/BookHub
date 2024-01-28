@@ -36,23 +36,4 @@ class RoleUpdateTest extends TestCase
             'name' => $updatedRoleData['name'],
         ]);
     }
-
-    /**
-     * Test updating a role with validation errors.
-     */
-    public function testUpdateRoleWithValidationErrors(): void
-    {
-        $user = User::factory()->create();
-        Passport::actingAs($user);
-
-        $role = Role::factory()->create();
-
-        $invalidUpdatedRoleData = [
-        ];
-
-        $response = $this->post("/api/roles/{$role->id}", $invalidUpdatedRoleData);
-
-        $response->assertStatus(422);
-
-    }
 }

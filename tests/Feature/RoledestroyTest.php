@@ -22,8 +22,8 @@ class RoleDestroyTest extends TestCase
         $user = User::factory()->create();
         Passport::actingAs($user);
 
-        // Create a role to be destroyed
-        $role = Role::factory()->create();
+        // Create a role with a unique name to be destroyed
+        $role = Role::factory()->create(['name' => 'UniqueRoleName']);
 
         // Send a DELETE request to the API endpoint for role deletion
         $response = $this->delete("/api/roles/{$role->id}");
@@ -34,6 +34,7 @@ class RoleDestroyTest extends TestCase
         // Assert that the role was deleted from the database
         $this->assertDatabaseMissing('roles', ['id' => $role->id]);
     }
+
 
     /**
      * Test destroying a nonexistent role.

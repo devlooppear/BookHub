@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Reservation;
 use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
@@ -94,8 +95,8 @@ class ReservationController extends Controller
             $request->validate([
                 'user_id' => 'nullable|exists:users,id|integer',
                 'book_id' => 'nullable|exists:books,id|integer',
-                'reservation_date' => 'date',
-                'pickup_deadline' => 'date',
+                'reservation_date' => 'nullable|date_format:Y-m-d H:i:s',
+                'pickup_deadline' => 'nullable|date_format:Y-m-d H:i:s',
                 'is_active' => 'nullable|numeric|in:0,1',
             ]);
 
@@ -111,19 +112,17 @@ class ReservationController extends Controller
                 $request->merge(['book_id' => intval($book_id)]);
             }
 
-            // Convert is_active to integer
-            $is_active = $request->input('is_active');
-            if (!is_null($is_active)) {
-                $request->merge(['is_active' => intval($is_active)]);
-            }
-
             // Use fill method instead of update to only update the provided fields
             $reservation->fill($request->all())->save();
 
             return response()->json($reservation, 200);
+        } catch (ValidationException $e) {
+            return response()->json(['error' => $e->errors()], 422);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['error' => 'Reservation not found.'], 404);
         } catch (Exception $e) {
             Log::error('Error updating reservation: ' . $e->getMessage());
-            return response()->json(['error' => 'An error occurred while updating the reservation: ' . $e->getMessage()]);
+            return response()->json(['error' => 'An error occurred while updating the reservation.'], 500);
         }
     }
 

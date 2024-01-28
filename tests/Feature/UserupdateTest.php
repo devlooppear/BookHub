@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Role;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -19,11 +20,13 @@ class UserupdateTest extends TestCase
 
         $user = User::factory()->create();
 
+        $role = Role::factory()->create();
+
         $updatedUserData = [
             'name' => 'Updated Name',
             'email' => 'updated.email@example.com',
             'password' => 'updatedpassword',
-            'role_id' => 2,
+            'role_id' => $role->id,
         ];
 
         $response = $this->actingAs($user, 'api')

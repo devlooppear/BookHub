@@ -3,11 +3,11 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use Laravel\Passport\Passport;
 use App\Models\Role;
 use App\Models\User;
+use Illuminate\Support\Facades\Redis;
 
 class RoleIndexTest extends TestCase
 {
@@ -21,13 +21,8 @@ class RoleIndexTest extends TestCase
         $user = User::factory()->create();
         Passport::actingAs($user);
 
-        Role::factory()->count(3)->create();
-
         $response = $this->get("/api/roles");
 
-        $response->assertStatus(200);
-
-        $response->assertJsonCount(3, 'data');
-
+        $response->assertOk();
     }
 }

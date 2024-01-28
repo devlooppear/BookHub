@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Role;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Redis;
 
 class RoleFactory extends Factory
 {
@@ -11,15 +12,12 @@ class RoleFactory extends Factory
 
     public function definition()
     {
-        // Specify the specific IDs for 'User' and 'Librarian'
-        $roleIds = ['User' => 1, 'Librarian' => 2];
-
-        // Randomly select 'User' or 'Librarian'
-        $roleName = $this->faker->randomElement(['User', 'Librarian']);
+        $redisKey = 'role_ids';
+        $id = Redis::incr($redisKey);
 
         return [
-            'id' => $roleIds[$roleName],
-            'name' => $roleName,
+            'id' => $id,
+            'name' => $this->faker->unique()->randomElement(['User', 'Librarian']),
         ];
     }
 }

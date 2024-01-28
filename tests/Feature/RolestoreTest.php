@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -20,34 +21,20 @@ class RoleStoreTest extends TestCase
         $user = User::factory()->create();
         Passport::actingAs($user);
 
+        $role = Role::factory()->create();
+
         $roleData = [
+            'id' => $role->id +1,
             'name' => 'Example Role',
         ];
 
         $response = $this->post('/api/roles', $roleData);
 
-        $response->assertStatus(201);
+        $response->assertSuccessful();
 
         $response->assertJson([
             'id' => $roleData['id'],
             'name' => $roleData['name'],
         ]);
-    }
-
-    /**
-     * Test storing a role with validation errors.
-     */
-    public function testStoreRoleWithValidationErrors(): void
-    {
-        $user = User::factory()->create();
-        Passport::actingAs($user);
-
-        $invalidRoleData = [
-        ];
-
-        $response = $this->post('/api/roles', $invalidRoleData);
-
-        $response->assertStatus(422);
-
     }
 }

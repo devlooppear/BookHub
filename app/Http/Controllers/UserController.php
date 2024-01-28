@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\ValidationException;
 use Laravel\Passport\Token;
 
 class UserController extends Controller
@@ -41,7 +42,6 @@ class UserController extends Controller
     public function store(Request $request)
     {
         try {
-
             $validatedData = $request->validate([
                 'name' => 'required|string|max:255',
                 'email' => 'required|email|unique:users|max:255',
@@ -67,6 +67,9 @@ class UserController extends Controller
             $this->tokenService->createToken($tokenData);
 
             return response()->json(['message' => 'User created successfully', 'user' => $user], 201);
+        } catch (ValidationException $e) {
+            // Handle validation errors
+            return response()->json(['error' => 'The given data was invalid.', 'errors' => $e->errors()], 422);
         } catch (Exception $e) {
             Log::error('Error creating user: ' . $e->getMessage());
             return response()->json(['error' => 'An error occurred while creating the user: ' . $e->getMessage()]);
