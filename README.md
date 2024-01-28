@@ -49,6 +49,17 @@ O BookHub é um sistema de reserva de biblioteca que gerencia usuários, bibliot
                 <img src="https://img.shields.io/badge/Passport-6DB33F?style=flat-square&logo=laravel&logoColor=white" alt="Passport">
             </p>
         </div>
+                <h3>Swoole</h3>
+        <p align="center">
+            <img src="https://img.shields.io/badge/Swoole-8.5.1-blue?style=flat-square&logo=swoole&logoColor=white" alt="Swoole">
+        </p>
+    </div>
+    <div>
+        <h3>Laravel Horizon</h3>
+        <p align="center">
+            <img src="https://img.shields.io/badge/Laravel%20Horizon-4.5.0-ff69b4?style=flat-square&logo=laravel&logoColor=white" alt="Laravel Horizon">
+        </p>
+    </div>
         <div>
             <h3>Outros</h3>
             <p align="center">
@@ -109,12 +120,24 @@ Particularmente, prefiro usar o Mailtrap. Para isso, acesse Mailtrap, faça logi
 Para otimizar e gerenciar a execução de jobs na aplicação, adotei o Laravel Horizon. Essa ferramenta proporciona:
 
 <html>
-<div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 16px;">
-    <h2>Laravel Horizon</h2>
-    <div style=" padding: 16px; text-align: center;">
-        <img src="img-doc/LaravelHorizon.png" alt="LaravelHorizon" style="max-width: 88%; border-radius: 8px;">
+    <div
+        style="
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        "
+    >
+        <h2>Laravel Horizon</h2>
+        <div style="padding: 16px; text-align: center">
+            <img
+                src="img-doc/LaravelHorizon.png"
+                alt="LaravelHorizon"
+                style="max-width: 88%; border-radius: 8px"
+            />
+        </div>
     </div>
-</div>
 </html>
 
 -   `Visualização Intuitiva`: Tenha uma visão clara e intuitiva do desempenho de suas filas de jobs por meio do painel de controle do Horizon.
@@ -125,7 +148,7 @@ Para otimizar e gerenciar a execução de jobs na aplicação, adotei o Laravel 
 
 O Laravel Horizon proporciona uma solução robusta para monitorar e otimizar o processamento de jobs, garantindo a eficiência e confiabilidade de sua aplicação Laravel. Para executar use:
 
-``` 
+```
 ./vendor/bin/sail artisan horizon
 ```
 
@@ -186,30 +209,66 @@ Os testes que realizei foram em relação aos controllers, mas é possível aume
 ## (Notificações)
 
 <html>
-    <div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 16px;">
-        <h2>Notificações aos usuários com 'role_id' === 2 (Bibliotecários): Criação de Reserva</h2>
-        <div style=" padding: 16px; text-align: center;">
-            <img src="img-doc/CreateReservationNotify.png" alt="CreateReservationNotify" style="max-width: 88%; border-radius: 8px;">
+    <div
+        style="
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        "
+    >
+        <h2>
+            Notificações aos usuários com 'role_id' === 2 (Bibliotecários):
+            Criação de Reserva
+        </h2>
+        <div style="padding: 16px; text-align: center">
+            <img
+                src="img-doc/CreateReservationNotify.png"
+                alt="CreateReservationNotify"
+                style="max-width: 88%; border-radius: 8px"
+            />
         </div>
-            <h2>Notificações aos usuários com 'role_id' === 2 (Bibliotecários): Atualização de Reserva</h2>
-        <div style=" padding: 16px; text-align: center;">
-            <img src="img-doc/UpdateReservationNotify.png" alt="UpdateReservationNotify" style="max-width: 88%; border-radius: 8px;">
+        <h2>
+            Notificações aos usuários com 'role_id' === 2 (Bibliotecários):
+            Atualização de Reserva
+        </h2>
+        <div style="padding: 16px; text-align: center">
+            <img
+                src="img-doc/UpdateReservationNotify.png"
+                alt="UpdateReservationNotify"
+                style="max-width: 88%; border-radius: 8px"
+            />
         </div>
-            <h2>Notificações aos usuários com 'role_id' === 2 (Bibliotecários): Deleção de Reserva</h2>
-        <div style=" padding: 16px; text-align: center;">
-            <img src="img-doc/DeletedResernationNotify.png" alt="DeletedResernationNotify" style="max-width: 88%; border-radius: 8px;">
+        <h2>
+            Notificações aos usuários com 'role_id' === 2 (Bibliotecários):
+            Deleção de Reserva
+        </h2>
+        <div style="padding: 16px; text-align: center">
+            <img
+                src="img-doc/DeletedResernationNotify.png"
+                alt="DeletedResernationNotify"
+                style="max-width: 88%; border-radius: 8px"
+            />
         </div>
-            <h2>Diagrama do Banco</h2>
-        <div style=" padding: 16px; text-align: center;">
-            <img src="img-doc/DBDiagram.png" alt="DBDiagram" style="max-width: 88%; border-radius: 8px;">
+        <h2>Diagrama do Banco</h2>
+        <div style="padding: 16px; text-align: center">
+            <img
+                src="img-doc/DBDiagram.png"
+                alt="DBDiagram"
+                style="max-width: 88%; border-radius: 8px"
+            />
         </div>
-            <h2>Registro de Usuário</h2>
-        <div style=" padding: 16px; text-align: center;">
-            <img src="img-doc/RegistredMail.png" alt="RegistredMail" style="max-width: 88%; border-radius: 8px;">
+        <h2>Registro de Usuário</h2>
+        <div style="padding: 16px; text-align: center">
+            <img
+                src="img-doc/RegistredMail.png"
+                alt="RegistredMail"
+                style="max-width: 88%; border-radius: 8px"
+            />
         </div>
     </div>
 </html>
-
 
 ## Usuários e Bibliotecários (Users):
 
