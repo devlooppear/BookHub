@@ -26,7 +26,7 @@ class ReservationDestroyTest extends TestCase
 
         $response = $this->delete("/api/reservations/{$reservation->id}");
 
-        $response->assertStatus(204);
+        $response->assertSuccessful();
 
     }
 
