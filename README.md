@@ -131,6 +131,20 @@ Particularmente, prefiro usar o Mailtrap. Para isso, acesse Mailtrap, faça logi
 
 -   Todas as rotas index retornam uma paginação se você adicionar o parâmetro de consulta ?page=`numero-da-pagina`
 
+## Testes:
+
+Para rodar os testes, use:
+
+```
+./vendor/bin/sail artisan test
+```
+
+Os testes que realizei foram em relação aos controllers, mas é possível aumentar ainda mais a cobertura de testes com o 'coverage'. Ele mostra sobre testes em outras partes como e-mail, consumo de microserviços, listeners, events, notifications, para conferir a cobertura mais abragente use:
+
+```
+./vendor/bin/sail artisan test --coverage
+```
+
 ## (Notificações)
 
 <div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 16px;">
