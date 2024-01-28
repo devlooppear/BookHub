@@ -8,7 +8,7 @@ O BookHub é um sistema de reserva de biblioteca que gerencia usuários, bibliot
     <div>
         <h3>Framework</h3>
         <p align="center">
-            <img src="https://img.shields.io/badge/Laravel-8.3-orange?style=flat-square&logo=laravel&logoColor=white" alt="Laravel">
+            <img src="https://img.shields.io/badge/Laravel-10-orange?style=flat-square&logo=laravel&logoColor=white" alt="Laravel">
         </p>
     </div>
     <div>
