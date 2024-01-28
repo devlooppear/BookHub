@@ -60,7 +60,6 @@ O BookHub é um sistema de reserva de biblioteca que gerencia usuários, bibliot
     </div>
 </div>
 
-
 ## Primeiros passos:
 
 ### Inicialização:
@@ -102,6 +101,16 @@ Você pode verificar o envio de e-mail ao registrar um usuário com:
 E acesse: http://localhost:8025
 
 Particularmente, prefiro usar o Mailtrap. Para isso, acesse Mailtrap, faça login, vá em 'Email Testing', crie uma nova Inbox, acesse-a e em integrações, selecione 'PHP 9+'. Em seguida, adapte as credenciais no seu arquivo .env.
+
+## Swoole Integration
+
+O Laravel inclui suporte para o Swoole, uma extensão PHP de alto desempenho que melhora a eficiência da aplicação, reduzindo a ociosidade de processos e aumentando a capacidade multitarefas. Isso pode levar a melhorias significativas no desempenho da aplicação.
+
+Para iniciar o servidor Swoole, utilize o seguinte comando no terminal, estando no diretório do seu projeto Laravel:
+
+```
+./vendor/bin/sail artisan swoole:http
+```
 
 ## Filtros
 
