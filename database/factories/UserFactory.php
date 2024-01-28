@@ -31,6 +31,9 @@ class UserFactory extends Factory
             Role::factory()->create();
         }
 
+        // Get all Role IDs
+        $roleIds = Role::pluck('id')->toArray();
+
         return [
             'id' => $userId,
             'name' => $this->faker->name(),
@@ -38,7 +41,7 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
-            'role_id' => Role::first()->id,
+            'role_id' => $this->faker->randomElement($roleIds),
         ];
     }
 
