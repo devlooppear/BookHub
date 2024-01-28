@@ -7,6 +7,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\ValidationException;
 
 class ReservationController extends Controller
 {
@@ -41,8 +42,8 @@ class ReservationController extends Controller
             $request->validate([
                 'user_id' => 'required|integer|exists:users,id',
                 'book_id' => 'required|integer|exists:books,id',
-                'reservation_date' => 'required|date',
-                'pickup_deadline' => 'required|date',
+                'reservation_date' => 'date',
+                'pickup_deadline' => 'date',
                 'is_active' => 'boolean',
             ]);
 
@@ -54,9 +55,12 @@ class ReservationController extends Controller
             $reservation = Reservation::create($data);
 
             return response()->json($reservation, 201);
+        } catch (ValidationException $e) {
+            return response()->json(['error' => $e->errors()], 422);
         } catch (Exception $e) {
             Log::error('Error storing reservation: ' . $e->getMessage());
-            return response()->json(['error' => 'An error occurred while storing the reservation: ' . $e->getMessage()]);
+
+            return response()->json(['error' => 'An error occurred while storing the reservation.'], 500);
         }
     }
 

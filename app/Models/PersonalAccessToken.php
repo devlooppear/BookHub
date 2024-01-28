@@ -12,6 +12,7 @@ class PersonalAccessToken extends Model
     protected $table = 'personal_access_tokens';
 
     protected $fillable = [
+        'id',
         'token',
         'user_id',
         'last_used_at',

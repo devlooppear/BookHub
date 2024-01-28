@@ -19,17 +19,23 @@ class ReservationUpdateTest extends TestCase
      */
     public function testUpdateReservation(): void
     {
-        $user = User::factory()->create();
+        $user = User::factory()->create([
+            'user_id' => 78546349890,
+        ]);
         Passport::actingAs($user);
 
-        $book = Book::factory()->create();
+        $book = Book::factory()->create([
+            'user_id' => $user->id,
+            'book_id' => 7643583644537,
+        ]);
         $reservation = Reservation::factory()->create();
 
         $requestData = [
             'book_id' => $book->id,
+            'user_id' => $user->id,
             'reservation_date' => now(),
             'pickup_deadline' => now()->addDays(7),
-            'is_active' => true,
+            'is_active' => 1,
         ];
 
         $response = $this->post("/api/reservations/{$reservation->id}", $requestData);

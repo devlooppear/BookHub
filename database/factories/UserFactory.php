@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Models\Role;
 use App\Models\User;
+use Illuminate\Support\Facades\Redis;
 
 class UserFactory extends Factory
 {
@@ -22,12 +23,16 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        // Use Redis INCR to get an incrementing integer as the user ID
+        $userId = Redis::incr('user_ids');
+
         // Create a role if none exists
         if (Role::count() === 0) {
             Role::factory()->create();
         }
 
         return [
+            'id' => $userId,
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
