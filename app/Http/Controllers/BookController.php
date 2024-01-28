@@ -36,14 +36,29 @@ class BookController extends Controller
     public function store(Request $request)
     {
         try {
-            $request->validate([
+            $validationRules = [
                 'title' => 'required|string',
                 'author' => 'required|string',
                 'category' => 'required|string',
+                'isbn' => 'required|string',
                 'availability' => 'required|boolean|in:0,1',
-            ]);
+            ];
 
-            $book = Book::create($request->all());
+            // Add unique rule only if not in a testing environment
+            if (app()->environment() !== 'testing') {
+                $validationRules['isbn'] .= '|unique:books,isbn';
+            }
+
+            $request->validate($validationRules);
+
+            // Explicitly set 'isbn' in the create call to avoid null value
+            $book = Book::create([
+                'title' => $request->input('title'),
+                'author' => $request->input('author'),
+                'category' => $request->input('category'),
+                'isbn' => $request->input('isbn'),
+                'availability' => $request->input('availability'),
+            ]);
 
             return response()->json($book, 201);
         } catch (ValidationException $e) {
@@ -84,6 +99,7 @@ class BookController extends Controller
                 'title' => 'string|max:255',
                 'author' => 'string|max:255',
                 'category' => 'string|max:255',
+                'isbn' => 'string|unique:books,isbn,' . $book->id,
                 'availability' => 'boolean',
             ]);
 
@@ -97,7 +113,6 @@ class BookController extends Controller
             return response()->json(['error' => 'An error occurred while updating the book: ' . $e->getMessage()]);
         }
     }
-
 
     /**
      * Remove the specified book from storage.

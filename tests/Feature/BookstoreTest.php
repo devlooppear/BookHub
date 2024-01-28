@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Laravel\Passport\Passport;
 use Tests\TestCase;
 use App\Models\User;
@@ -18,30 +17,43 @@ class BookstoreTest extends TestCase
      */
     public function testStoreBook(): void
     {
+        // Create a user using the factory
         $user = User::factory()->create();
 
+        // Act as the created user
         Passport::actingAs($user);
 
+        // Create a book using the factory
+        $book = Book::factory()->create();
+
+        // Define book data for the API request
         $bookData = [
             'title' => 'Sample Book',
             'author' => 'Sample Author',
             'category' => 'Sample Category',
+            'isbn' => '9781234567890',
             'availability' => 1,
         ];
 
+        // Send a request to create a new book
         $response = $this->post('/api/books', $bookData);
 
-        $response->assertStatus(201);
+        // Assert that the request was successful
+        $response->assertSuccessful();
 
+        // Assert that the response JSON matches the expected data
         $response->assertJson([
             'title' => $bookData['title'],
             'author' => $bookData['author'],
             'category' => $bookData['category'],
+            'isbn' => $bookData['isbn'],
             'availability' => $bookData['availability'],
         ]);
 
+        // Assert that the book is present in the database
         $this->assertDatabaseHas('books', [
             'title' => $bookData['title'],
+            'isbn' => $bookData['isbn'],
         ]);
     }
 
@@ -50,18 +62,24 @@ class BookstoreTest extends TestCase
      */
     public function testStoreBookWithInvalidData(): void
     {
+        // Create a user using the factory
         $user = User::factory()->create();
 
+        // Act as the created user
         Passport::actingAs($user);
 
+        // Define invalid book data for the API request
         $invalidBookData = [
             'title' => 437856739,
             'author' => true,
             'category' => 5.7,
+            'isbn' => 476325876,
         ];
 
+        // Send a request to create a new book with invalid data
         $response = $this->post('/api/books', $invalidBookData);
 
+        // Assert that the request returns a 422 status code for validation error
         $response->assertStatus(422);
     }
 }

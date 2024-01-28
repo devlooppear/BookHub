@@ -14,7 +14,8 @@ class Book extends Model
         'title',
         'author',
         'category',
-        'availability'
+        'availability',
+        'isbn',
     ];
 
     public function users()
