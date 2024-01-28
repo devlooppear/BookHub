@@ -4,6 +4,7 @@ namespace App\Listeners;
 
 use App\Events\ReservationEvent;
 use App\Models\User;
+use App\Models\Book;
 use App\Notifications\ReservationNotification;
 use Exception;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -29,10 +30,22 @@ class ReservationListener
 
         foreach ($librarianUsers as $librarian) {
             try {
+
+                $user = User::find($event->reservationData['user_id']);
+                $book = Book::find($event->reservationData['book_id']);
+
+                if ($user && $book) {
+
+                    $event->reservationData['user'] = $user->toArray();
+                    $event->reservationData['book'] = $book->toArray();
+                }
+
                 $librarian->notify(new ReservationNotification($event->reservationData, $event->actionType));
             } catch (Exception $notificationException) {
                 Log::error('Error sending reservation notification: ' . $notificationException->getMessage());
             }
         }
+
+        Log::info('Updated Reservation Data:', $event->reservationData);
     }
 }
