@@ -1,0 +1,26 @@
+2024-02-04 21:40:06,413 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-02-04 21:40:06,414 INFO supervisord started with pid 1
+2024-02-04 21:40:07,417 INFO spawned: 'nginx' with pid 7
+2024-02-04 21:40:07,420 INFO spawned: 'php-fpm' with pid 8
+2024-02-04 21:40:07,427 INFO exited: nginx (exit status 1; not expected)
+2024-02-04 21:40:08,447 INFO spawned: 'nginx' with pid 11
+2024-02-04 21:40:08,448 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-02-04 21:40:08,463 INFO exited: nginx (exit status 1; not expected)
+2024-02-04 21:40:10,468 INFO spawned: 'nginx' with pid 12
+2024-02-04 21:40:10,483 INFO exited: nginx (exit status 1; not expected)
+2024-02-04 21:40:13,489 INFO spawned: 'nginx' with pid 13
+2024-02-04 21:40:13,505 INFO exited: nginx (exit status 1; not expected)
+2024-02-04 21:40:14,506 INFO gave up: nginx entered FATAL state, too many start retries too quickly
+2024-02-04 21:52:11,438 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-02-04 21:52:11,439 INFO supervisord started with pid 1
+2024-02-04 21:52:12,442 INFO spawned: 'nginx' with pid 7
+2024-02-04 21:52:12,444 INFO spawned: 'php-fpm' with pid 8
+2024-02-04 21:52:12,450 INFO exited: nginx (exit status 1; not expected)
+2024-02-04 21:52:13,468 INFO spawned: 'nginx' with pid 11
+2024-02-04 21:52:13,468 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-02-04 21:52:13,475 INFO exited: nginx (exit status 1; not expected)
+2024-02-04 21:52:15,480 INFO spawned: 'nginx' with pid 12
+2024-02-04 21:52:15,487 INFO exited: nginx (exit status 1; not expected)
+2024-02-04 21:52:18,493 INFO spawned: 'nginx' with pid 13
+2024-02-04 21:52:18,502 INFO exited: nginx (exit status 1; not expected)
+2024-02-04 21:52:19,503 INFO gave up: nginx entered FATAL state, too many start retries too quickly
